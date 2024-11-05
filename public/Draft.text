@@ -1,0 +1,22 @@
+export default function () {
+  return (
+    <div>
+      
+    </div>
+  )
+}
+
+
+
+
+
+
+
+useEffect(() => {
+  async function fetchBlog() {
+  const res = await fetch('http://localhost:8000/blogs')
+  const data = await res.json();
+  setBlogs(data);
+  }
+  fetchBlog()
+}, [])
