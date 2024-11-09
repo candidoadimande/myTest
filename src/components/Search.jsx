@@ -1,9 +1,31 @@
-import { useState, useEffect } from "react"
+import {useState, useEffect} from "react"
 import * as eva from "eva-icons";
 const URL = "http://localhost:8000/blogs"
-import Home from "./Home"
-import Drawer from "./Drawer"
-export default function Search({blogs, setBlogs, isLoading, setisLoading, show}) {
+
+import styled  from "styled-components"
+
+const Form = styled.form`
+  background: rgb(0,0,0,0.4);
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  width: 250px;
+  padding: 8px;
+  border-radius: 50px;
+  
+  input {
+    background: transparent;
+    border: 0;
+    outline: none;
+    color: #fff;
+  }
+  button {
+    background: none;
+    border: 0;
+  }
+
+`;
+export default function Search({setisLoading, setBlogs}) {
   const [query, setQuery] = useState("");
   useEffect(() => {
     async function fetchBlog() {
@@ -19,25 +41,20 @@ export default function Search({blogs, setBlogs, isLoading, setisLoading, show})
     eva.replace();
   }, []);
   return (
-    <div>
-     {show && <Drawer/>}
-      <div className="searchContainer">
-        <input
+    <Form>
+      <input
         type="text"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Pesquise"
-        />
-        <button
+      />
+      <button>
+        <i 
           data-eva="search"
           data-eva-height="20px"
+          data-eva-fill="white "
         />
-      </div>
-      <Home
-          blogs={blogs}
-          isLoading={isLoading}
-          query={query} 
-      />
-    </div>
+      </button>
+    </Form>
   )
 }
