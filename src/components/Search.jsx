@@ -1,7 +1,5 @@
-import {useState, useEffect} from "react"
+import {useEffect} from "react"
 import * as eva from "eva-icons";
-const URL = "http://localhost:8000/blogs"
-
 import styled  from "styled-components"
 
 const Form = styled.form`
@@ -25,17 +23,8 @@ const Form = styled.form`
   }
 
 `;
-export default function Search({setisLoading, setBlogs}) {
-  const [query, setQuery] = useState("");
-  useEffect(() => {
-    async function fetchBlog() {
-      const res = await fetch(URL)
-      const data = await res.json();
-      setBlogs(data);
-      setisLoading(false);
-    }
-    fetchBlog();
-  }, []);
+export default function Search() {
+  
   useEffect(() => {
     // add this line
     eva.replace();
@@ -44,8 +33,6 @@ export default function Search({setisLoading, setBlogs}) {
     <Form>
       <input
         type="text"
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
         placeholder="Pesquise"
       />
       <button>

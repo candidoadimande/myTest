@@ -1,22 +1,32 @@
-import { useState, useEffect } from 'react'
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import Main from "./components/Main"
 import Header from "./components/Header"
+import Blogdetails from "./components/Blogdetails"
+import IdiomPage from "./components/IdiomPage"
 import Footer from "./components/Footer"
 function App() {
-  const [blogs, setBlogs] = useState("");
-  const [isLoading, setisLoading] = useState(true)
-    const [show, setShow] = useState(0)
   return (
-    <div>
-    <Header show={show} setShow={setShow}/>
-    <Main
-        show={show}
-        setBlogs={setBlogs} setisLoading={setisLoading}
-        blogs={blogs}
-        isLoading={isLoading}
-      />
-      <Footer/>
-    </div>
+    <Router>
+      <div>
+        <Header/>
+        <Routes>
+          <Route path="/" element={
+              <Main/>
+            }
+          />
+         <Route path="/blogs/:id"
+            element={
+              <Blogdetails/>
+            }
+          />
+          <Route path="/IdiomPage" element={
+              <IdiomPage/>
+            }
+          />
+        </Routes>
+        <Footer/>
+      </div>
+    </Router>
   )
 }
 
